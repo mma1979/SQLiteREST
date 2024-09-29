@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Mma.Tools.RestSQLite": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51679;http://localhost:51680"
+    }
+  }
+}
