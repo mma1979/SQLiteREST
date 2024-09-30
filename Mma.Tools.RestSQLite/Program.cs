@@ -4,12 +4,48 @@ using Dapper;
 using Microsoft.Data.Sqlite;
 
 using System.Data;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = args is { Length: > 0 } ? args[0] :
-    "Data Source=D:\\workspaces\\playground\\ProductsApi\\ProductsApi\\products.db";
+var connectionString = "";
+var version = Assembly.GetEntryAssembly()!
+        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+        .ToString().Split('+')[0];
+
+if(args.Length < 1)
+{
+    Console.WriteLine($"usage: sqliterest --database your_database.db");
+    Environment.Exit(-1);
+}
+
+switch (args[0])
+{
+    case "--database":
+        {
+            connectionString = $"Data Source={args[1]}";
+            break;
+        }
+    case "--version": 
+        { 
+            Console.WriteLine(version); 
+            Environment.Exit(0);
+            break; 
+        }
+    case "--help":
+        {
+            Console.WriteLine($"usage: sqliterest --database your_database.db"); 
+            Environment.Exit(0);
+            break;
+        }
+    default:
+        {
+            Console.WriteLine($"usage: sqliterest --database your_database.db");
+            Environment.Exit(0);
+            break;
+        }
+};
 
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();

@@ -9,12 +9,12 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>sqliterest</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <Version>1.0.0</Version>
-    <PackageVersion>1.0.0</PackageVersion>
+    <Version>1.0.1</Version>
+    <PackageVersion>1.0.1</PackageVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageIcon>mma3.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/mma1979/mma-cli</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/mma1979/SQLiteREST</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyName>SQLiteREST</AssemblyName>
   </PropertyGroup>
@@ -31,6 +31,10 @@
 
   <ItemGroup>
     <None Include="docs\**\*" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="nupkg\" />
   </ItemGroup>
 
 </Project>
