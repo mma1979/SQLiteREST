@@ -9,8 +9,8 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>sqliterest</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <Version>1.0.2</Version>
-    <PackageVersion>1.0.2</PackageVersion>
+    <Version>1.0.3</Version>
+    <PackageVersion>1.0.3</PackageVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageIcon>mma3.png</PackageIcon>
