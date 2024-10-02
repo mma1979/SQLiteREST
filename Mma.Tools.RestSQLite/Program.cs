@@ -14,7 +14,7 @@ var version = Assembly.GetEntryAssembly()!
         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
         .ToString().Split('+')[0];
 
-if(args.Length < 1)
+if (args.Length < 1)
 {
     Console.WriteLine($"usage: sqliterest --database your_database.db");
     Environment.Exit(-1);
@@ -27,15 +27,15 @@ switch (args[0])
             connectionString = $"Data Source={args[1]}";
             break;
         }
-    case "--version": 
-        { 
-            Console.WriteLine(version); 
+    case "--version":
+        {
+            Console.WriteLine(version);
             Environment.Exit(0);
-            break; 
+            break;
         }
     case "--help":
         {
-            Console.WriteLine($"usage: sqliterest --database your_database.db"); 
+            Console.WriteLine($"usage: sqliterest --database your_database.db");
             Environment.Exit(0);
             break;
         }
@@ -50,9 +50,14 @@ switch (args[0])
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
+app.UseCors(c =>
+c.AllowAnyHeader()
+.AllowAnyOrigin()
+.AllowAnyMethod());
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -67,7 +72,7 @@ var result = await connection.QueryAsync<string>("SELECT name FROM sqlite_master
 foreach (var table in result)
 {
 
-    app.MapGet("/db/" + table , async (HttpContext context) =>
+    app.MapGet("/db/" + table, async (HttpContext context) =>
     {
         using var connection = new SqliteConnection(connectionString);
         var query = $"SELECT * FROM {table}";
@@ -75,7 +80,7 @@ foreach (var table in result)
         return Results.Ok(result);
     });
 
-    app.MapGet("/db/" + table +"/{id}", async (HttpContext context, int id) =>
+    app.MapGet("/db/" + table + "/{id}", async (HttpContext context, int id) =>
     {
         using var connection = new SqliteConnection(connectionString);
         var query = $"SELECT * FROM {table} where id = @id";
