@@ -1,14 +1,21 @@
 ﻿
 using Dapper;
 
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Data.Sqlite;
 
 using System.Data;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 var connectionString = "";
 var version = Assembly.GetEntryAssembly()!
         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
